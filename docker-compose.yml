@@ -1,0 +1,41 @@
+
+version: '3.8'
+services:
+  redis:
+    image: redis:6-alpine
+  postgres:
+    image: postgres:14-alpine
+    environment:
+      POSTGRES_DB: printdb
+      POSTGRES_USER: printuser
+      POSTGRES_PASSWORD: printpass
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  backend:
+    build: ./backend
+    ports:
+      - "4000:4000"
+    environment:
+      - PORT=4000
+      - DATABASE_URL=postgres://printuser:printpass@postgres:5432/printdb
+      - REDIS_URL=redis://redis:6379
+      - S3_ENDPOINT=minio
+      - S3_BUCKET=multilink-uploads
+      - S3_ACCESS_KEY=minioadmin
+      - S3_SECRET_KEY=minioadmin
+    depends_on:
+      - postgres
+      - redis
+  worker:
+    build: ./worker
+    depends_on:
+      - backend
+      - redis
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+volumes:
+  pgdata:

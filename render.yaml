@@ -1,0 +1,27 @@
+
+services:
+  - type: web
+    name: multilink-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node app.js
+    region: oregon
+    repo: <REPO_PLACEHOLDER>
+    rootDir: backend
+  - type: static
+    name: multilink-frontend
+    env: static
+    buildCommand: npm install && npm run build
+    publishPath: dist
+    region: oregon
+    repo: <REPO_PLACEHOLDER>
+    rootDir: frontend
+  - type: worker
+    name: multilink-worker
+    env: node
+    buildCommand: npm install
+    startCommand: node worker.js
+    region: oregon
+    repo: <REPO_PLACEHOLDER>
+    rootDir: worker
