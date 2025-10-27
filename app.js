@@ -54,4 +54,4 @@ app.get('/api/jobs/:id', (req, res) => {
 });
 
 const PORT = process.env.PORT || 4000;
-app.listen(10000, () => console.log("Server started"));
+app.listen(PORT, () => console.log('Backend listening on', PORT));

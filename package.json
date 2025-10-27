@@ -1,13 +1,18 @@
 {
-  "name": "multilink-worker",
+  "name": "multilink-backend",
   "version": "1.0.0",
-  "main": "worker.js",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
   "dependencies": {
-    "bullmq": "^1.70.0",
-    "handlebars": "^4.7.7",
-    "puppeteer": "^20.8.0",
+    "express": "^4.18.2",
+    "multer": "^1.4.5-lts.1",
+    "csv-parse": "^5.3.8",
     "minio": "^7.0.18",
-    "fs-extra": "^11.1.1",
-    "node-fetch": "^2.6.7"
+    "bullmq": "^1.70.0",
+    "cors": "^2.8.5",
+    "body-parser": "^1.20.2",
+    "uuid": "^9.0.0"
   }
 }
